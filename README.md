@@ -1,27 +1,7 @@
-This webpage allows a user to 
+This webpage allows a user to enter a city into the search bar, and the current weather and 5 day forecast will be shown. The icon updates based on the weather (current or forecast) and the UVI index colour changes based on the severity.
 
-Show current conditions for a city
-City name
-Date
-Icon of weather
-Temperature
-Humidity
-Wind speed
-UV Index
-UV coloured as favorable, moderate, or severe
+Future work for this webpage includes saving past searches as a list of buttons, such that they can be selected and that city's weather will be displayed again.
 
-Show future conditions for a city
-5 days of:
-Date
-Icon of weather
-Temperature
-Wind Speed
-Humidity
+https://jessluff.github.io/weather-dashboard/
 
-Form input to search for city
-Weather is shown for that city
-City is added to search history as a button
-When city in search history is selected, search for that city
-
-Uses OpenWeather API
-Uses local storage for past searches
+![Screenshot](/screenshot.png)

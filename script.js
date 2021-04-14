@@ -1,7 +1,7 @@
 
+// Init containers to later be dynamically updated
 var cityFormEl = document.querySelector('#city-form');
 var cityInputEl = document.querySelector('#city');
-
 var weatherContainerEl = document.querySelector('#daily-city');
 var day1ContainerEl = document.querySelector('#day1');
 var day2ContainerEl = document.querySelector('#day2');
@@ -12,6 +12,7 @@ var day5ContainerEl = document.querySelector('#day5');
 // Moment takes the current time
 var today = moment();
 
+// Handles Get Weather button
 var formSubmitHandler = function (event) {
   event.preventDefault();
 
@@ -25,6 +26,7 @@ var formSubmitHandler = function (event) {
   }
 };
 
+// API to obtain global coordinates from searched city
 var getLocation = function (city) {
   var apiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=20a3f1b5434cb27033931167f4082092";
 
@@ -48,6 +50,7 @@ var getLocation = function (city) {
     });
 };
 
+// API to get weather forecast for city
 var getWeather = function (city, lat, lon) {
   var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=metric&exclude=minutely,hourly,alerts&appid=20a3f1b5434cb27033931167f4082092";
 
@@ -68,12 +71,15 @@ var getWeather = function (city, lat, lon) {
     });
 };
 
+// Printing of weather forecast information
 var displayWeather = function (data, city) {
   if (data.length === 0) {
     return;
   }
+    // Displays city returned by API
     var cityEl = document.createElement('h1');
     cityEl.textContent = 'City: ' + city; //+ data.current.dt;
+    // Updates icon representative of city weather
     var iconEl = document.createElement('img');
     iconEl.setAttribute( 'src', 'http://openweathermap.org/img/wn/' + data.current.weather[0].icon + '@2x.png')
     iconEl.setAttribute('style', 'float:right');
@@ -81,6 +87,7 @@ var displayWeather = function (data, city) {
     weatherContainerEl.appendChild(cityEl);
     weatherContainerEl.appendChild(iconEl);
 
+    // Displays current weather forecast returned by API
     var tempEl = document.createElement('p');
     tempEl.textContent = 'Temp: ' + data.current.temp + 'C';
     var windEl = document.createElement('p');
@@ -90,6 +97,7 @@ var displayWeather = function (data, city) {
     var uviEl = document.createElement('p');
     var uviRating = data.current.uvi;
     uviEl.textContent = 'UV Index: ' + uviRating;
+    // Sets colour of UVI rating based on severity classification
     if(uviRating <3 ){
       uviEl.setAttribute('style','color:green');
     }
@@ -99,7 +107,6 @@ var displayWeather = function (data, city) {
     else {
       uviEl.setAttribute('style','color:red');
     }
-
 
     var forecastEl = document.createElement('h1');
     forecastEl.textContent = "5 Day Forecast:";
@@ -113,12 +120,12 @@ var displayWeather = function (data, city) {
 
     var day;
 
+    // Loops through the 5 days
     for (var i = 0; i<5; i++){
       
-
-
       switch(i){
         case 0:
+          // Init of Day 1 weather elements
           var day1Icon = document.createElement('img');
           icon = day1Icon;
           var day1Temp = document.createElement('p');
@@ -180,24 +187,17 @@ var displayWeather = function (data, city) {
           break;
       }
 
+      // Updates icon, temp, wind and humidity for each day in loop
       icon.setAttribute( 'src', 'http://openweathermap.org/img/wn/' + data.daily[i].weather[0].icon + '@2x.png')
       temp.textContent = 'Temp: ' + data.daily[i].temp.max + 'C';
       wind.textContent = 'Wind: ' + data.daily[i].wind_speed + 'km/hr';
       humidity.textContent = 'Humidity: ' + data.daily[i].humidity + '%';
-
       
       day.appendChild(temp);
       day.appendChild(wind);
       day.appendChild(humidity);
       day.appendChild(icon);
-
-        
-
-
-    
     }
-
-
 
 };
 
