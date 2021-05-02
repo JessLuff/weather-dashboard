@@ -28,7 +28,7 @@ var formSubmitHandler = function (event) {
 
 // API to obtain global coordinates from searched city
 var getLocation = function (city) {
-  var apiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=20a3f1b5434cb27033931167f4082092";
+  var apiUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=20a3f1b5434cb27033931167f4082092";
 
   fetch(apiUrl)
     .then(function (response) {
@@ -81,7 +81,7 @@ var displayWeather = function (data, city) {
     cityEl.textContent = 'City: ' + city; //+ data.current.dt;
     // Updates icon representative of city weather
     var iconEl = document.createElement('img');
-    iconEl.setAttribute( 'src', 'http://openweathermap.org/img/wn/' + data.current.weather[0].icon + '@2x.png')
+    iconEl.setAttribute( 'src', 'https://openweathermap.org/img/wn/' + data.current.weather[0].icon + '@2x.png')
     iconEl.setAttribute('style', 'float:right');
 
     weatherContainerEl.appendChild(cityEl);
@@ -188,7 +188,7 @@ var displayWeather = function (data, city) {
       }
 
       // Updates icon, temp, wind and humidity for each day in loop
-      icon.setAttribute( 'src', 'http://openweathermap.org/img/wn/' + data.daily[i].weather[0].icon + '@2x.png')
+      icon.setAttribute( 'src', 'https://openweathermap.org/img/wn/' + data.daily[i].weather[0].icon + '@2x.png')
       temp.textContent = 'Temp: ' + data.daily[i].temp.max + 'C';
       wind.textContent = 'Wind: ' + data.daily[i].wind_speed + 'km/hr';
       humidity.textContent = 'Humidity: ' + data.daily[i].humidity + '%';
